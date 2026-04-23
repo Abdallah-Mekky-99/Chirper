@@ -4,22 +4,29 @@ use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\auth\Logout;
 use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\ChirpController;
-use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [ChirpController::class, 'index']);
+Route::get('/design-preview', function () {
+    return view('preview');
+})->name('design-preview');
 
-Route::middleware('auth')->group(function() {
-    Route::post('/chirps', [ChirpController::class, 'store']);
-    Route::get('/chirps/{chirp}/edit', [ChirpController::class, 'edit']);
-    Route::put('/chirps/{chirp}', [ChirpController::class, 'update']);
-    Route::delete('/chirps/{chirp}', [ChirpController::class, 'destroy']);
+Route::get('/', [ChirpController::class, 'index'])->name('chirps.index');
+
+Route::middleware('auth')->group(function () {
+
+    Route::resource('chirps', ChirpController::class)->only(['store', 'edit', 'update', 'destroy']);
+
+    Route::resource('profile', ProfileController::class)->only(['show']);
+
+    Route::post('/chirps/{chirp}/like', [LikeController::class, 'store'])->name('like.store');
+
     Route::post('/logout', Logout::class);
 });
 
-
 // register & login
-Route::middleware('guest')->group(function() {
+Route::middleware('guest')->group(function () {
 
     Route::view('/register', 'auth.register')
         ->name('register');
@@ -29,8 +36,3 @@ Route::middleware('guest')->group(function() {
         ->name('login');
     Route::post('/login', Login::class);
 });
-
-
-
-Route::get('/quotes', [QuoteController::class, 'index']);
-Route::post('/Add-quote', [QuoteController::class, 'store']);

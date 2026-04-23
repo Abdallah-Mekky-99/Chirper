@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('quotes', function (Blueprint $table) {
-            $table->id();
-            $table->string('text', 99);
-            $table->timestamps();
+        Schema::create('likes', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('chirp_id')->constrained()->cascadeOnDelete();
+
+            $table->unique(['user_id', 'chirp_id']);
         });
     }
 
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('quotes');
+        Schema::dropIfExists('likes');
     }
 };

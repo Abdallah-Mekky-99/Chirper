@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -48,7 +49,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function chirps() : HasMany {
+    public function chirps(): HasMany
+    {
         return $this->hasMany(Chirp::class);
+    }
+
+    public function likes(): BelongsToMany
+    {
+        return $this->belongsToMany(Chirp::class, 'likes');
     }
 }

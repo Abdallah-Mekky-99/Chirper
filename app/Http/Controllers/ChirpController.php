@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chirp;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ChirpController extends Controller
 {
@@ -15,11 +16,19 @@ class ChirpController extends Controller
      */
     public function index()
     {
-        $chirps = Chirp::with('user')
-        ->latest()
-        ->take(50)
-        ->get();
-        
+        /** @var Chirp[] $chirps */
+        $chirps = Chirp::query()
+            ->with('user')
+            ->withCount('likes')
+            ->when(Auth::check(), function ($query) {
+                $query->withExists(['likes' => function ($query) {
+                    $query->where('user_id', Auth::getUser()->id);
+                }]);
+            })
+            ->latest()
+            ->take(50)
+            ->get();
+
         return view('home', compact('chirps'));
     }
 
@@ -37,9 +46,9 @@ class ChirpController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'message' => 'required|string|max:255'
+            'message' => 'required|string|max:255',
         ]);
-        
+
         $request->user()->chirps()->create($validated);
 
         return redirect('/')->with('success', 'Your chirp has been posted!');
@@ -71,10 +80,10 @@ class ChirpController extends Controller
         $this->authorize('update', $chirp);
 
         $validated = $request->validate([
-            'message' => 'required|string|max:255'
+            'message' => 'required|string|max:255',
         ], [
             'message.required' => 'Please write something to chirp!',
-            'message.max' => 'Chirps must be 255 characters or less.'
+            'message.max' => 'Chirps must be 255 characters or less.',
         ]);
 
         $chirp->update($validated);
@@ -88,9 +97,9 @@ class ChirpController extends Controller
     public function destroy(Chirp $chirp)
     {
         $this->authorize('delete', $chirp);
-        
+
         $chirp->delete();
 
-        return redirect('/')->with('success', 'Chirp Deleted!');
+        return back()->with('success', 'Chirp Deleted!');
     }
 }

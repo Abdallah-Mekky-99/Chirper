@@ -12,103 +12,308 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen flex flex-col bg-base-200 font-sans">
-    <nav class="navbar bg-base-100">
-        <div class="navbar-start">
-            <a href="/">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 312 69" class="h-7 w-auto px-4">
-                    <path fill="#D9D9D9"
-                        d="M40.97.446c22.091 0 40 17.909 40 40a39.805 39.805 0 0 1-6.56 21.95c-.61.928-1.87 1.105-2.825.541a18.92 18.92 0 0 0-9.651-2.63c-.787 0-1.563.048-2.325.141a19.108 19.108 0 0 0-7.03-9.607 18.57 18.57 0 0 0 5.996-11.778l8.493-7.543a.931.931 0 0 0-.43-1.607l-10.423-2.138c-3.207-5.575-9.218-9.329-16.103-9.329-10.256 0-18.57 8.33-18.571 18.605 0 1.274.128 2.519.372 3.721-6.58.032-12.37 3.407-15.764 8.517-1.07 1.61-3.854 1.582-4.265-.306a40.101 40.101 0 0 1-.914-8.537c0-22.091 17.908-40 40-40Z" />
-                    <path fill="url(#a)"
-                        d="M40.97.446c22.091 0 40 17.909 40 40a39.805 39.805 0 0 1-6.56 21.95c-.61.928-1.87 1.105-2.825.541a18.92 18.92 0 0 0-9.651-2.63c-.787 0-1.563.048-2.325.141a19.108 19.108 0 0 0-7.03-9.607 18.57 18.57 0 0 0 5.996-11.778l8.493-7.543a.931.931 0 0 0-.43-1.607l-10.423-2.138c-3.207-5.575-9.218-9.329-16.103-9.329-10.256 0-18.57 8.33-18.571 18.605 0 1.274.128 2.519.372 3.721-6.58.032-12.37 3.407-15.764 8.517-1.07 1.61-3.854 1.582-4.265-.306a40.101 40.101 0 0 1-.914-8.537c0-22.091 17.908-40 40-40Z" />
-                    <path fill="#D9D9D9"
-                        d="M45.065 28.834a3.718 3.718 0 0 1 3.714 3.72 3.719 3.719 0 0 1-3.715 3.722 3.719 3.719 0 0 1-3.713-3.721 3.718 3.718 0 0 1 3.714-3.721Z" />
-                    <path fill="url(#b)"
-                        d="M45.065 28.834a3.718 3.718 0 0 1 3.714 3.72 3.719 3.719 0 0 1-3.715 3.722 3.719 3.719 0 0 1-3.713-3.721 3.718 3.718 0 0 1 3.714-3.721Z" />
-                    <path fill="#1B1B18"
-                        d="m299.633 26.19 1.798 8.246v22.01h-7.192V26.19h5.394Zm.496 11.656-1.488-.682V31.77l.558-.744c.413-.702 1.074-1.488 1.984-2.356a13.566 13.566 0 0 1 3.162-2.232c1.24-.62 2.5-.93 3.782-.93.62 0 1.198.042 1.736.124.578.083 1.012.228 1.302.434v6.51h-1.984c-2.728 0-4.774.434-6.138 1.302-1.364.827-2.336 2.15-2.914 3.968ZM273.838 57.066c-2.976 0-5.58-.64-7.812-1.922-2.232-1.322-3.989-3.162-5.27-5.518-1.24-2.356-1.86-5.104-1.86-8.246 0-3.182.62-5.952 1.86-8.308 1.281-2.397 3.038-4.257 5.27-5.58 2.232-1.322 4.836-1.984 7.812-1.984 3.017 0 5.642.682 7.874 2.046 2.273 1.323 4.03 3.183 5.27 5.58 1.24 2.356 1.86 5.084 1.86 8.184 0 .372-.021.744-.062 1.116 0 .372-.021.703-.062.992H265.22V37.66h18.166l-1.488 3.286c0-2.852-.661-5.187-1.984-7.006-1.323-1.818-3.327-2.728-6.014-2.728-2.439 0-4.381.765-5.828 2.294-1.405 1.488-2.108 3.472-2.108 5.952v3.286c0 2.563.703 4.609 2.108 6.138 1.447 1.488 3.431 2.232 5.952 2.232 2.273 0 4.03-.475 5.27-1.426a13.445 13.445 0 0 0 3.286-3.534l5.146 3.1c-1.364 2.563-3.183 4.506-5.456 5.828-2.273 1.323-5.084 1.984-8.432 1.984ZM242.175 57.128c-2.728 0-5.104-.64-7.13-1.922-1.984-1.281-3.534-3.1-4.65-5.456-1.116-2.356-1.674-5.146-1.674-8.37 0-3.224.558-6.014 1.674-8.37 1.158-2.397 2.728-4.236 4.712-5.518 2.026-1.322 4.382-1.984 7.068-1.984 2.811 0 5.25.662 7.316 1.984 2.108 1.323 3.741 3.183 4.898 5.58 1.158 2.356 1.736 5.126 1.736 8.308 0 3.1-.578 5.849-1.736 8.246-1.157 2.356-2.79 4.196-4.898 5.518-2.108 1.323-4.546 1.984-7.316 1.984Zm-15.81 11.098V26.19h5.394l1.798 6.634h-.62v16.182h.62v19.22h-7.192Zm14.632-17.546c2.315 0 4.196-.847 5.642-2.542 1.447-1.736 2.17-3.988 2.17-6.758 0-2.81-.723-5.084-2.17-6.82-1.446-1.736-3.327-2.604-5.642-2.604-2.273 0-4.154.868-5.642 2.604-1.446 1.695-2.17 3.948-2.17 6.758 0 2.811.724 5.084 2.17 6.82 1.488 1.695 3.369 2.542 5.642 2.542ZM209.902 26.19l1.798 8.246v22.01h-7.192V26.19h5.394Zm.496 11.656-1.488-.682V31.77l.558-.744c.413-.702 1.075-1.488 1.984-2.356a13.566 13.566 0 0 1 3.162-2.232c1.24-.62 2.501-.93 3.782-.93.62 0 1.199.042 1.736.124.579.083 1.013.228 1.302.434v6.51h-1.984c-2.728 0-4.774.434-6.138 1.302-1.364.827-2.335 2.15-2.914 3.968ZM196.93 56.446h-7.192V26.19h7.192v30.256Zm-8.122-39.68c0-1.322.392-2.397 1.178-3.224.826-.868 1.942-1.302 3.348-1.302 1.322 0 2.397.434 3.224 1.302.826.827 1.24 1.902 1.24 3.224 0 1.323-.414 2.398-1.24 3.224-.827.827-1.902 1.24-3.224 1.24-1.406 0-2.522-.413-3.348-1.24-.786-.826-1.178-1.901-1.178-3.224ZM155.405 56.446V14.224h7.192v42.222h-7.192Zm19.902 0V37.598c0-2.025-.434-3.368-1.302-4.03-.827-.702-1.86-1.054-3.1-1.054-1.158 0-2.356.248-3.596.744a11.427 11.427 0 0 0-3.286 1.922 10.082 10.082 0 0 0-2.418 2.728l-1.426-6.138a20.156 20.156 0 0 1 3.782-3.286 16.408 16.408 0 0 1 4.34-2.17 14.833 14.833 0 0 1 4.836-.806c2.149 0 3.844.352 5.084 1.054 1.24.703 2.17 1.674 2.79 2.914.62 1.199 1.012 2.563 1.178 4.092.206 1.488.31 3.038.31 4.65v18.228h-7.192ZM131.034 57.128c-4.299 0-8.06-.93-11.284-2.79-3.224-1.901-5.725-4.484-7.502-7.75-1.736-3.306-2.604-7.047-2.604-11.222 0-3.141.516-6.034 1.55-8.68 1.074-2.686 2.562-5.001 4.464-6.944 1.942-1.942 4.216-3.451 6.82-4.526 2.604-1.074 5.456-1.612 8.556-1.612 4.836 0 8.804 1.013 11.904 3.038 3.1 2.026 5.58 4.816 7.44 8.37l-6.82 2.294c-1.736-2.521-3.638-4.278-5.704-5.27-2.026-.992-4.299-1.488-6.82-1.488-2.687 0-5.084.64-7.192 1.922-2.108 1.24-3.782 2.976-5.022 5.208-1.24 2.232-1.86 4.795-1.86 7.688 0 2.894.62 5.456 1.86 7.688 1.24 2.232 2.914 3.989 5.022 5.27 2.108 1.24 4.505 1.86 7.192 1.86 2.521 0 4.794-.496 6.82-1.488 2.066-.992 3.968-2.748 5.704-5.27l6.82 2.294c-1.86 3.555-4.34 6.345-7.44 8.37-3.1 2.026-7.068 3.038-11.904 3.038Z" />
-                    <defs>
-                        <linearGradient id="a" x1=".97" x2="72.586" y1=".446" y2="80.006"
-                            gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#45B8FF" />
-                            <stop offset="1" stop-color="#4B2A99" />
-                        </linearGradient>
-                        <linearGradient id="b" x1=".97" x2="72.586" y1=".446" y2="80.006"
-                            gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#45B8FF" />
-                            <stop offset="1" stop-color="#4B2A99" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </a>
-        </div>
-        <div class="navbar-end gap-2">
-            @auth
-                <span class="text-sm"> {{ auth()->user()->name }} </span>
-                <form method="POST" action="/logout" class="inline">
-                    @csrf
-                    <button type="submit" class="btn btn-ghost btn-sm">LogOut</button>
-                </form>
-            @else
-                <a href="{{ route('login') }}" class="btn btn-ghost btn-sm">Sign In</a>
-                <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Sign Up</a>
-            @endauth
+<body class="min-h-screen flex flex-col bg-base-200 font-sans pb-16 lg:pb-0">
+    {{-- 1. TOP NAVIGATION (Sticky & Frosted Glass) --}}
+    <nav class="navbar bg-base-100/80 backdrop-blur-md border-b border-base-200 px-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+
+            {{-- Brand (Left) --}}
+            <div class="flex-none">
+                <a href="{{ route('chirps.index') }}" class="flex items-center gap-2 group">
+                    <div
+                        class="bg-primary text-primary-content rounded-xl p-1.5 transition-transform group-hover:scale-105 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="m18 8 4 4-4 4" />
+                            <path d="M2 12h8" />
+                            <path d="m4 16-2-4 2-4" />
+                            <path d="M14 12h8" />
+                            <path d="m10 8 4 4-4 4" />
+                        </svg>
+                    </div>
+                    <span
+                        class="text-xl font-black tracking-tighter text-base-content hidden sm:block">Micro-connect</span>
+                </a>
+            </div>
+
+            {{-- Theme Toggle (Center-ish) --}}
+            <div class="flex-1 flex justify-end md:justify-center px-4">
+                <!-- Front-end logic only: DaisyUI Theme Controller -->
+                <!-- Toggles between lofi (light) and dracula (dark) -->
+                <label class="swap swap-rotate btn btn-ghost btn-circle btn-sm">
+                    <input type="checkbox" class="theme-controller" value="dracula" />
+                    <!-- sun icon -->
+                    <svg class="swap-off fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+                    </svg>
+                    <!-- moon icon -->
+                    <svg class="swap-on fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+                    </svg>
+                </label>
+            </div>
+
+            {{-- Account Actions (Right) --}}
+            <div class="flex-none flex items-center gap-4">
+                @auth
+                    <div class="dropdown dropdown-end">
+                        <label tabindex="0"
+                            class="btn btn-ghost flex items-center gap-3 px-2 hover:bg-base-200 rounded-full md:rounded-lg">
+                            <span class="hidden md:block text-sm font-bold opacity-80">{{ auth()->user()->name }}</span>
+                            <!-- Assuming you have a user-avatar component, keeping it as is -->
+                            <x-user-avatar :user="auth()->user()" size="size-9" />
+                        </label>
+                        <ul tabindex="0"
+                            class="menu menu-sm dropdown-content mt-3 z-1 p-2 shadow-2xl bg-base-100 border border-base-200 rounded-box w-52">
+                            <li><a href="{{ route('profile.show', auth()->user()) }}" class="py-3 font-medium">Profile</a>
+                            </li>
+                            <li><a class="py-3 font-medium">Settings</a></li>
+                            <div class="divider my-1 opacity-50"></div>
+                            <li>
+                                <form method="POST" action="/logout" class="w-full">
+                                    @csrf
+                                    <button type="submit" class="w-full text-left py-3 text-error font-bold">Log
+                                        Out</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-ghost btn-sm font-bold">Log in</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary btn-sm font-bold rounded-full px-6">Sign up</a>
+                @endauth
+            </div>
         </div>
     </nav>
 
+    {{-- Toasts / Alerts --}}
     @if (session('success'))
-        <div class="toast toast-top toast-center">
-            <div class="alert alert-success animate-fade-out">
-                <svg xmlns="<http://www.w3.org/2000/svg>" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+        <div class="toast toast-top toast-center z-100">
+            <div class="alert alert-success animate-fade-out shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span>{{ session('success') }}</span>
+                <span class="font-medium">{{ session('success') }}</span>
             </div>
         </div>
     @endif
 
     @if (session('error'))
-        <div class="toast toast-top toast-center">
-            <div class="alert alert-error animate-fade-out">
+        <div class="toast toast-top toast-center z-100">
+            <div class="alert alert-error animate-fade-out shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span>{{ session('error') }}</span>
+                <span class="font-medium">{{ session('error') }}</span>
             </div>
         </div>
     @endif
 
-    <main class="flex-1 container mx-auto px-4 py-8">
-        {{ $slot }}
+    {{-- 2. MAIN 3-COLUMN LAYOUT --}}
+    <main class="flex-1 max-w-7xl mx-auto w-full px-4 py-6 flex gap-6 lg:gap-8 relative">
+
+        {{-- LEFT SIDEBAR (Desktop Navigation) --}}
+        <aside class="hidden md:flex flex-col w-64 shrink-0 gap-2 sticky top-22 h-[calc(100vh-6rem)]">
+
+            <a href="{{ route('chirps.index') }}"
+                class="btn btn-ghost justify-start text-lg font-normal hover:bg-base-200 rounded-full px-6 {{ request()->routeIs('chirps.index') ? 'bg-base-200 font-bold' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="mr-3">
+                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+                Home
+            </a>
+
+            <a href="#"
+                class="btn btn-ghost justify-start text-lg font-normal hover:bg-base-200 rounded-full px-6">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="mr-3">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                </svg>
+                Explore
+            </a>
+
+            <a href="#"
+                class="btn btn-ghost justify-start text-lg font-normal hover:bg-base-200 rounded-full px-6">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="mr-3">
+                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+                </svg>
+                Notifications
+            </a>
+
+            @auth
+                <a href="{{ route('profile.show', auth()->user()) }}"
+                    class="btn btn-ghost justify-start text-lg font-normal hover:bg-base-200 rounded-full px-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="mr-3">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    Profile
+                </a>
+            @endauth
+
+
+        </aside>
+
+        {{-- CENTER FEED (Main Content Slot) --}}
+        <!-- This is where your page views (index.blade.php, etc) will be injected -->
+        <div class="flex-1 min-w-0 max-w-2xl border-x border-base-200 min-h-screen pb-20">
+            {{-- Dynamic Header for the feed --}}
+            @if (isset($header))
+                <div class="sticky top-16 z-40 bg-base-100/90 backdrop-blur-md p-4 border-b border-base-200 hidden md:block">
+                    <h2 class="text-xl font-bold">{{ $header }}</h2>
+                </div>
+            @endif
+
+            <div class="p-4 sm:p-6">
+                {{ $slot }}
+            </div>
+        </div>
+
+        {{-- RIGHT SIDEBAR (Trending / Suggestions) --}}
+        <aside class="hidden lg:flex flex-col w-80 shrink-0 gap-6 sticky top-22 h-[calc(100vh-6rem)]">
+
+            {{-- Search Bar --}}
+            <div class="relative group">
+                <input type="text" placeholder="Search..."
+                    class="input input-bordered w-full rounded-full bg-base-200 focus:bg-base-100 pl-12 transition-colors border-none focus:ring-2 focus:ring-primary/50" />
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="absolute left-4 top-3.5 h-5 w-5 text-base-content/50 group-focus-within:text-primary transition-colors"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+
+            {{-- Who to Follow Widget --}}
+            <div class="bg-base-100 rounded-2xl border border-base-200 overflow-hidden shadow-sm">
+                <div class="p-4 bg-base-200/50 border-b border-base-200">
+                    <h3 class="font-extrabold text-lg">Who to follow</h3>
+                </div>
+
+                <div class="flex flex-col">
+
+                    {{-- Static Suggestion 1 --}}
+                    <div
+                        class="p-4 flex items-center justify-between hover:bg-base-200/50 transition-colors cursor-pointer">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <div class="avatar">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-neutral text-neutral-content flex items-center justify-center font-bold">
+                                    JD
+                                </div>
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                                <span class="font-bold text-sm truncate hover:underline">John Doe</span>
+                                <span class="text-xs opacity-60 truncate">@johndoe</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-neutral rounded-full px-4 ml-2">Follow</button>
+                    </div>
+
+                    {{-- Static Suggestion 2 --}}
+                    <div
+                        class="p-4 flex items-center justify-between hover:bg-base-200/50 transition-colors cursor-pointer">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <div class="avatar">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary text-primary-content flex items-center justify-center font-bold">
+                                    SJ
+                                </div>
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                                <span class="font-bold text-sm truncate hover:underline">Sarah Jenkins</span>
+                                <span class="text-xs opacity-60 truncate">@sarahcodes</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-neutral rounded-full px-4 ml-2">Follow</button>
+                    </div>
+
+
+                </div>
+                <button class="btn btn-ghost btn-sm w-full text-primary rounded-none h-12 hover:bg-base-200/50">Show
+                    more</button>
+            </div>
+
+            {{-- Footer Links --}}
+            <div class="px-4 text-xs opacity-60 flex flex-wrap gap-x-3 gap-y-1">
+                <a href="#" class="hover:underline">Terms of Service</a>
+                <a href="#" class="hover:underline">Privacy Policy</a>
+                <a href="#" class="hover:underline">Cookie Policy</a>
+                <span>© 2026 Micro-connect</span>
+            </div>
+        </aside>
+
     </main>
 
-    <footer class="w-full mt-24">
-        <div class="mx-auto w-full max-w-[1400px] px-4 xl:px-16">
-            <svg class="block w-full h-auto text-base-content opacity-8" viewBox="0 0 1280 308" aria-hidden="true"
-                focusable="false">
-                <path d="M50.2753 0H0V308.689H144.713V263.27H50.2753V0Z" fill="currentColor" />
-                <path
-                    d="M322.209 130.973C315.796 120.684 306.688 112.602 294.883 106.718C283.081 100.84 271.201 97.8969 259.253 97.8969C243.798 97.8969 229.665 100.764 216.843 106.496C204.014 112.228 193.015 120.099 183.834 130.091C174.654 140.088 167.51 151.628 162.412 164.706C157.308 177.792 154.761 191.54 154.761 205.94C154.761 220.645 157.308 234.457 162.412 247.39C167.508 260.332 174.652 271.796 183.834 281.788C193.015 291.785 204.017 299.647 216.843 305.379C229.665 311.111 243.798 313.978 259.253 313.978C271.201 313.978 283.081 311.038 294.883 305.159C306.688 299.282 315.796 291.197 322.209 280.904V308.685H369.865V103.186H322.209V130.973ZM317.837 231.076C314.922 239.016 310.841 245.925 305.598 251.804C300.35 257.687 294.009 262.389 286.579 265.917C279.146 269.445 270.905 271.208 261.875 271.208C252.837 271.208 244.676 269.445 237.391 265.917C230.104 262.389 223.839 257.687 218.593 251.804C213.345 245.925 209.335 239.016 206.57 231.076C203.794 223.138 202.417 214.759 202.417 205.942C202.417 197.12 203.794 188.742 206.57 180.804C209.335 172.866 213.345 165.961 218.593 160.078C223.839 154.201 230.102 149.493 237.391 145.965C244.676 142.437 252.837 140.674 261.875 140.674C270.908 140.674 279.146 142.437 286.579 145.965C294.009 149.493 300.35 154.199 305.598 160.078C310.844 165.961 314.922 172.866 317.837 180.804C320.748 188.742 322.209 197.12 322.209 205.942C322.209 214.759 320.748 223.138 317.837 231.076Z"
-                    fill="currentColor" />
-                <path
-                    d="M709.568 130.973C703.155 120.684 694.047 112.602 682.242 106.718C670.44 100.84 658.56 97.8969 646.612 97.8969C631.157 97.8969 617.024 100.764 604.202 106.496C591.373 112.228 580.374 120.099 571.193 130.091C562.013 140.088 554.869 151.628 549.771 164.706C544.666 177.792 542.12 191.54 542.12 205.94C542.12 220.645 544.666 234.457 549.771 247.39C554.867 260.332 562.01 271.796 571.193 281.788C580.374 291.785 591.375 299.647 604.202 305.379C617.024 311.111 631.157 313.978 646.612 313.978C658.56 313.978 670.44 311.038 682.242 305.159C694.047 299.282 703.155 291.197 709.568 280.904V308.685H757.224V103.186H709.568V130.973ZM705.198 231.076C702.283 239.016 698.202 245.925 692.959 251.804C687.711 257.687 681.37 262.389 673.94 265.917C666.507 269.445 658.266 271.208 649.236 271.208C640.198 271.208 632.037 269.445 624.752 265.917C617.465 262.389 611.2 257.687 605.954 251.804C600.706 245.925 596.696 239.016 593.931 231.076C591.155 223.138 589.778 214.759 589.778 205.942C589.778 197.12 591.155 188.742 593.931 180.804C596.696 172.866 600.706 165.961 605.954 160.078C611.2 154.201 617.463 149.493 624.752 145.965C632.037 142.437 640.198 140.674 649.236 140.674C658.269 140.674 666.507 142.437 673.94 145.965C681.37 149.493 687.711 154.199 692.959 160.078C698.205 165.961 702.283 172.866 705.198 180.804C708.109 188.742 709.57 197.12 709.57 205.942C709.568 214.759 708.107 223.138 705.198 231.076Z"
-                    fill="currentColor" />
-                <path d="M1280 1.12315e-05H1232.35V308.689H1280V1.12315e-05Z" fill="currentColor" />
-                <path d="M407.466 308.689H455.117V150.486H536.876V103.192H407.466V308.689Z" fill="currentColor" />
-                <path
-                    d="M948.281 103.192L888.386 260.557L828.489 103.192H780.224L858.441 308.689H918.331L996.546 103.192H948.281Z"
-                    fill="currentColor" />
-                <path
-                    d="M1100.48 97.908C1042.13 97.908 995.937 146.279 995.937 205.944C995.937 271.9 1040.64 313.98 1106.59 313.98C1143.5 313.98 1167.06 299.745 1195.85 268.746L1163.66 243.621C1163.64 243.646 1139.36 275.802 1103.1 275.802C1060.96 275.802 1043.22 241.533 1043.22 223.803H1201.32C1209.62 155.913 1165.37 97.908 1100.48 97.908ZM1043.35 188.085C1043.71 184.13 1049.2 136.086 1100.1 136.086C1151.01 136.086 1157.19 184.123 1157.55 188.085H1043.35Z"
-                    fill="currentColor" />
+    {{-- 3. MOBILE BOTTOM NAVIGATION (Hidden on Desktop) --}}
+    <div class="btm-nav md:hidden z-50 border-t border-base-200 bg-base-100/90 backdrop-blur-lg pb-safe">
+        <a href="#" class="text-base-content active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
-            </p>
-        </div>
-    </footer>
+            <span class="btm-nav-label text-[10px] font-medium mt-1">Home</span>
+        </a>
+
+        <a href="#" class="text-base-content/60 hover:text-base-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+            </svg>
+            <span class="btm-nav-label text-[10px] font-medium mt-1">Search</span>
+        </a>
+
+        <a href="#" class="text-base-content/60 hover:text-base-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+            </svg>
+            <span class="btm-nav-label text-[10px] font-medium mt-1">Activity</span>
+        </a>
+
+        <a href="#" class="text-base-content/60 hover:text-base-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span class="btm-nav-label text-[10px] font-medium mt-1">Profile</span>
+        </a>
+    </div>
+
+    {{-- MOBILE FAB (Floating Action Button) - Hidden on Desktop --}}
+    <button
+        class="md:hidden fixed bottom-20 right-4 btn btn-primary btn-circle shadow-xl shadow-primary/40 z-40 h-14 w-14">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+        </svg>
+    </button>
 </body>
 
 </html>
