@@ -36,10 +36,12 @@ class ProfileController extends Controller
      */
     public function show(User $profile)
     {
+        $profile->load('chirps.comments.user');
+
         return view('profile', [
             'user' => $profile,
-            'chirps' => $profile->chirps
-            ]);
+            'chirps' => $profile->chirps,
+        ]);
     }
 
     /**

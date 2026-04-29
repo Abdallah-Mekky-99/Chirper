@@ -51,11 +51,16 @@ class User extends Authenticatable
 
     public function chirps(): HasMany
     {
-        return $this->hasMany(Chirp::class);
+        return $this->hasMany(Chirp::class)->chaperone();
     }
 
     public function likes(): BelongsToMany
     {
         return $this->belongsToMany(Chirp::class, 'likes');
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }

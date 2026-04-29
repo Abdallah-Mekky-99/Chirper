@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\auth\Logout;
 use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\ChirpController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('chirps', ChirpController::class)->only(['store', 'edit', 'update', 'destroy']);
 
     Route::resource('profile', ProfileController::class)->only(['show']);
+
+    Route::post('/comments/{chirp}/comment', [CommentController::class, 'store'])
+        ->name('comments.store');
+
+    Route::resource('comments', CommentController::class)->only(['update', 'destroy']);
 
     Route::post('/chirps/{chirp}/like', [LikeController::class, 'store'])->name('like.store');
 

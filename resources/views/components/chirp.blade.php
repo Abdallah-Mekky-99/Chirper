@@ -83,7 +83,10 @@
 
             {{-- Interaction Icons --}}
             <div class="flex items-center justify-between mt-4 max-w-md text-base-content/60">
-                <button class="flex items-center gap-2 hover:text-primary transition-colors group/btn">
+                {{-- Reply / Comment Button --}}
+                <button type="button"
+                    onclick="document.getElementById('comments-{{ $chirp->id }}').classList.toggle('hidden')"
+                    class="flex items-center gap-2 hover:text-primary transition-colors group/btn cursor-pointer">
                     <div class="p-2 rounded-full group-hover/btn:bg-primary/10 transition-colors -ml-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -91,6 +94,8 @@
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                         </svg>
                     </div>
+                    {{-- Optional: Show comments count here --}}
+                    <span class="text-xs font-medium">{{ $chirp->comments_count }}</span>
                 </button>
                 <button class="flex items-center gap-2 hover:text-success transition-colors group/btn">
                     <div class="p-2 rounded-full group-hover/btn:bg-success/10 transition-colors">
@@ -140,6 +145,46 @@
                     </div>
                 </button>
             </div>
+
+            {{-- Comments Section (Toggleable) --}}
+            <div id="comments-{{ $chirp->id }}" class="hidden mt-4 pt-4 border-t border-base-200">
+                @auth
+                    <form method="POST" action="{{ route('comments.store', $chirp->id) }}"
+                        class="flex gap-3 items-start">
+                        @csrf
+                        {{-- Shows the currently logged-in user's avatar next to the input --}}
+                        <div class="shrink-0 mt-1">
+                            <x-user-avatar :user="auth()->user()" size="size-8" />
+                        </div>
+
+                        <div class="flex-1 flex flex-col items-end gap-2">
+                            <textarea name="content" rows="2" maxlength="255"
+                                class="textarea textarea-bordered w-full rounded-2xl bg-base-200/50 focus:bg-base-100 transition-colors border-none resize-none min-h-0 py-3"
+                                placeholder="Post your reply" required></textarea>
+
+                            <button type="submit" class="btn btn-primary btn-sm rounded-full px-6 font-bold">
+                                Reply
+                            </button>
+                        </div>
+                    </form>
+                @else
+                    <div class="text-center py-4 bg-base-200/50 rounded-xl mb-4">
+                        <p class="text-sm text-base-content/60">Please <a href="{{ route('login') }}"
+                                class="link link-primary font-bold">log in</a> to join the conversation.</p>
+                    </div>
+                @endauth
+
+                {{-- The list of actual comments will go here --}}
+                <div class="space-y-4 mt-2">
+                    @forelse ($chirp->comments as $comment)
+                        <x-comment :comment="$comment" />
+                    @empty
+                        <p>No comments yet.</p>
+                    @endforelse
+                    {{-- @foreach ($chirp->comments as $comment) ... @endforeach --}}
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
