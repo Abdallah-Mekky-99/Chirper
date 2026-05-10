@@ -1,4 +1,4 @@
-@props(['chirp'])
+@props(['chirp', 'showFollow' => true])
 
 <div class="bg-base-100 rounded-2xl border border-base-200 p-5 hover:bg-base-200/40 transition-colors group shadow-sm">
     <div class="flex gap-4">
@@ -26,54 +26,59 @@
                     </div>
                 </div>
 
-                @can('update', $chirp)
-                    <div class="dropdown dropdown-end shrink-0 -mt-2 -mr-2">
-                        <button tabindex="0"
-                            class="btn btn-ghost btn-sm btn-circle text-base-content/50 hover:text-base-content transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="1" />
-                                <circle cx="19" cy="12" r="1" />
-                                <circle cx="5" cy="12" r="1" />
-                            </svg>
-                        </button>
-                        <ul tabindex="0"
-                            class="dropdown-content z-1 menu p-2 shadow-xl bg-base-100 rounded-box w-52 border border-base-200">
-                            <li>
-                                <a href="{{ route('chirps.edit', $chirp->id) }}" class="flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M12 22h6a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v10" />
-                                        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-                                        <path d="M10.4 12.6a2 2 0 1 1 3 3L8 21l-4 1 1-4Z" />
-                                    </svg>
-                                    Edit
-                                </a>
-                            </li>
-                            <li>
-                                <form action="{{ route('chirps.destroy', $chirp->id) }}" method="POST"
-                                    class="w-full m-0 p-0">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        onclick="return confirm('Are you sure you want to delete this post?')"
-                                        class="w-full text-left text-error hover:bg-error/10 hover:text-error px-4 py-2 flex items-center gap-2">
+                <div class="flex items-center gap-2">
+                    @if ($showFollow)
+                        <x-follow-button :user="$chirp->user" />
+                    @endif
+
+                    @can('update', $chirp)
+                        <div class="dropdown dropdown-end shrink-0">
+                            <button tabindex="0"
+                                class="btn btn-ghost btn-sm btn-circle text-base-content/70 hover:text-base-content transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="currentColor">
+                                    <circle cx="12" cy="12" r="3" />
+                                    <circle cx="12" cy="4" r="3" />
+                                    <circle cx="12" cy="20" r="3" />
+                                </svg>
+                            </button>
+                            <ul tabindex="0"
+                                class="dropdown-content z-1 menu p-2 shadow-xl bg-base-100 rounded-box w-52 border border-base-200">
+                                <li>
+                                    <a href="{{ route('chirps.edit', $chirp->id) }}" class="flex items-center gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M3 6h18" />
-                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                            <path d="M12 22h6a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v10" />
+                                            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                            <path d="M10.4 12.6a2 2 0 1 1 3 3L8 21l-4 1 1-4Z" />
                                         </svg>
-                                        Delete
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                @endcan
+                                        Edit
+                                    </a>
+                                </li>
+                                <li>
+                                    <form action="{{ route('chirps.destroy', $chirp->id) }}" method="POST"
+                                        class="w-full m-0 p-0">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            onclick="return confirm('Are you sure you want to delete this post?')"
+                                            class="w-full text-left text-error hover:bg-error/10 hover:text-error px-4 py-2 flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M3 6h18" />
+                                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                            </svg>
+                                            Delete
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    @endcan
+                </div>
             </div>
 
             {{-- Message Body --}}
@@ -122,9 +127,10 @@
                         class="flex items-center gap-2 hover:text-error transition-colors group/btn {{ $isLiked ? 'text-error' : '' }}">
                         <div
                             class="p-2 rounded-full group-hover/btn:bg-error/10 transition-colors {{ $isLiked ? 'bg-error/10' : '' }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                fill="{{ $isLiked ? 'currentColor' : 'none' }}" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                viewBox="0 0 24 24" fill="{{ $isLiked ? 'currentColor' : 'none' }}"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <path
                                     d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                             </svg>

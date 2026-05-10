@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class FollowerController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -26,30 +29,20 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, User $userToFollow)
     {
-        //
+        $result = $request->user()->followings()->toggle($userToFollow->id);
+        $message = count($result['attached']) == 0 ? "unfollowed {$userToFollow->name} ;(" : "followed {$userToFollow->name} :)";
+
+        return back()->with('success', $message);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $profileId)
+    public function show(string $id)
     {
-        $user = User::query()
-            ->with([
-                'chirps.comments.user',
-                'followers' => fn($q) => $q->withIsFollowed(),
-                'followings' => fn($q) => $q->withIsFollowed()
-            ])
-            ->withCount(['followers', 'followings'])
-            ->withIsFollowed()
-            ->findOrFail($profileId);
-
-        return view('profile', [
-            'user' => $user,
-            'chirps' => $user->chirps,
-        ]);
+        //
     }
 
     /**

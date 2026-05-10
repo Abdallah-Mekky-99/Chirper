@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\Login;
-use App\Http\Controllers\auth\Logout;
+use App\Http\Controllers\Auth\Logout;
 use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('comments', CommentController::class)->only(['update', 'destroy']);
 
     Route::post('/chirps/{chirp}/like', [LikeController::class, 'store'])->name('like.store');
+
+    Route::post('/users/follow/{userToFollow}', [FollowerController::class, 'store'])->name('toggle-follow');
 
     Route::post('/logout', Logout::class);
 });

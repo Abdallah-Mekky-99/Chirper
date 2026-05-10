@@ -19,19 +19,21 @@ class ChirpController extends Controller
         /** @var Chirp[] $chirps */
         $chirps = Chirp::query()
             ->with([
-                'user',
+                'user' =>fn ($q) => $q->withIsFollowed(),
                 'comments' => fn ($q) => $q->latest()->take(2),
                 'comments.user',
             ])
             ->withCount('likes', 'comments')
             ->when(Auth::check(), function ($query) {
-                $query->withExists(['likes' => function ($query) {
-                    $query->where('user_id', Auth::id());
-                }]);
+                $query->withExists([
+                    'likes' => fn ($q) => $q->where('user_id', Auth::id()),
+                ]);
             })
             ->latest()
             ->take(50)
             ->get();
+
+        // dd($chirps->map(fn ($ch) => $ch->user->is_followed));
 
         return view('home', compact('chirps'));
     }
