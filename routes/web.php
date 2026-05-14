@@ -22,12 +22,12 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('profile', ProfileController::class)->only(['show']);
 
-    Route::post('/comments/{chirp}/comment', [CommentController::class, 'store'])
+    Route::post('/comments/{chirp}/comment/{commentId}', [CommentController::class, 'store'])
         ->name('comments.store');
 
     Route::resource('comments', CommentController::class)->only(['update', 'destroy']);
 
-    Route::post('/chirps/{chirp}/like', [LikeController::class, 'store'])->name('like.store');
+    Route::post('/like/{type}/{id}', [LikeController::class, 'store'])->name('like.toggle');
 
     Route::post('/users/follow/{userToFollow}', [FollowerController::class, 'store'])->name('toggle-follow');
 

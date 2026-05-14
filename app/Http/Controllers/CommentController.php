@@ -30,16 +30,28 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Chirp $chirp)
+    public function store(Request $request, Chirp $chirp, int $commentId)
     {
         $validated = $request->validate([
             'content' => 'required|string|max:255',
         ]);
 
-        $chirp->comments()->create([
+        $newComment = $chirp->comments()->create([
             'content' => $validated['content'],
             'user_id' => $request->user()->id,
         ]);
+
+        // dd($newComment);
+
+        // this doesn't work at all and needs to be fixed
+        if ($commentId) {
+            $comment_exists = Comment::whereId($commentId)->exists();
+            if ($comment_exists) {
+                $newComment->parent_id = $commentId;
+                $newComment->save();
+            }
+        }
+
 
         return back()->with('success', 'comment added successflly');
     }

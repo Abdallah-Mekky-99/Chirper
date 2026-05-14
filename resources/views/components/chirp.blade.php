@@ -114,31 +114,7 @@
                         </svg>
                     </div>
                 </button>
-                <form action="{{ route('like.store', $chirp->id) }}" method="POST" class="m-0 p-0">
-                    @csrf
-
-                    {{-- TODO: Replace 'false' with your actual condition to check if the user liked this chirp --}}
-                    @php
-                        $isLiked = $chirp->likes_exists;
-                    @endphp
-
-                    {{-- Hint: If you make this a toggle (like/unlike), you can keep it as POST. --}}
-                    <button type="submit"
-                        class="flex items-center gap-2 hover:text-error transition-colors group/btn {{ $isLiked ? 'text-error' : '' }}">
-                        <div
-                            class="p-2 rounded-full group-hover/btn:bg-error/10 transition-colors {{ $isLiked ? 'bg-error/10' : '' }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                viewBox="0 0 24 24" fill="{{ $isLiked ? 'currentColor' : 'none' }}"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path
-                                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                            </svg>
-                        </div>
-                        {{-- Optional: Add a dynamic like count here next to the heart --}}
-                        <span class="text-xs font-medium">{{ $chirp->likes_count }}</span>
-                    </button>
-                </form>
+                <x-like-button :model="$chirp" type="chirp" />
                 <button class="flex items-center gap-2 hover:text-primary transition-colors group/btn">
                     <div class="p-2 rounded-full group-hover/btn:bg-primary/10 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
@@ -155,7 +131,7 @@
             {{-- Comments Section (Toggleable) --}}
             <div id="comments-{{ $chirp->id }}" class="hidden mt-4 pt-4 border-t border-base-200">
                 @auth
-                    <form method="POST" action="{{ route('comments.store', $chirp->id) }}"
+                    <form method="POST" action="{{ route('comments.store', [$chirp->id, 0]) }}"
                         class="flex gap-3 items-start">
                         @csrf
                         {{-- Shows the currently logged-in user's avatar next to the input --}}
@@ -182,7 +158,7 @@
 
                 {{-- The list of actual comments will go here --}}
                 <div class="space-y-4 mt-2">
-                    @forelse ($chirp->comments as $comment)
+                    @forelse ($chirp->topLevelComments as $comment)
                         <x-comment :comment="$comment" />
                     @empty
                         <p>No comments yet.</p>

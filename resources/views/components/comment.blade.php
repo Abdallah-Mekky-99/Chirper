@@ -3,7 +3,6 @@
 <div class="flex gap-3 group">
     {{-- Avatar Column --}}
     <div class="shrink-0 mt-1">
-        {{-- TODO: Pass the comment's user relation here (e.g., $comment->user) --}}
         <x-user-avatar :user="$comment->user" size="size-8" />
     </div>
 
@@ -14,7 +13,6 @@
             {{-- Header Area --}}
             <div class="flex items-start justify-between">
                 <div class="flex items-center gap-2 flex-wrap leading-tight">
-                    {{-- TODO: Bind the comment's author name here (e.g., $comment->user->name) --}}
                     <a href="{{ route('profile.show', $comment->user_id) }}"
                         class="font-bold text-[14px] hover:underline text-base-content">
                         {{ $comment->user->name }}
@@ -115,10 +113,55 @@
             @endcan
         </div>
 
-        {{-- Optional Interaction (Like/Reply for comments) --}}
-        {{-- <div class="flex gap-4 mt-1 ml-2">
-            <button class="text-[12px] font-medium text-base-content/60 hover:text-base-content transition-colors">Like</button>
-            <button class="text-[12px] font-medium text-base-content/60 hover:text-base-content transition-colors">Reply</button>
-        </div> --}}
+        {{-- Optional Interaction (Like and Reply for comments) --}}
+        <div class="flex items-center gap-2 mt-1 ml-2 text-base-content/60">
+            <x-like-button :model="$comment" type="comment" />
+
+            <button type="button"
+                onclick="document.getElementById('reply-form-{{ $comment->id }}').classList.toggle('hidden')"
+                class="flex items-center hover:text-primary transition-colors group/reply cursor-pointer"
+                title="Reply">
+                <div class="p-2 rounded-full group-hover/reply:bg-primary/10 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+            </button>
+        </div>
+
+        {{-- Reply Form (Hidden by default) --}}
+        @auth
+            <div id="reply-form-{{ $comment->id }}" class="hidden mt-2 ml-4">
+                <form action="{{ route('comments.store', [$comment->chirp_id, $comment->id]) }}" method="POST"
+                    class="flex gap-3 items-start">
+                    @csrf
+                    <div class="shrink-0 mt-1">
+                        <x-user-avatar :user="auth()->user()" size="size-6" />
+                    </div>
+                    <div class="flex-1 flex flex-col items-end gap-2">
+                        <textarea name="content" rows="1" maxlength="255"
+                            class="textarea textarea-bordered w-full rounded-2xl bg-base-200/50 focus:bg-base-100 transition-colors border-none resize-none min-h-0 py-2 text-[14px]"
+                            placeholder="Write a reply..." required></textarea>
+                        <div class="flex gap-2">
+                            <button type="button"
+                                onclick="document.getElementById('reply-form-{{ $comment->id }}').classList.add('hidden')"
+                                class="btn btn-ghost btn-xs rounded-full">Cancel</button>
+                            <button type="submit" class="btn btn-primary btn-xs rounded-full px-4">Reply</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        @endauth
+
+        {{-- Nested Replies --}}
+        @if ($comment->childComments)
+            <div class="mt-3 ml-2 border-l-2 border-base-200 pl-4 space-y-4">
+                @foreach ($comment->childComments as $reply)
+                    <x-comment :comment="$reply" />
+                @endforeach
+            </div>
+        @endif
     </div>
 </div>
