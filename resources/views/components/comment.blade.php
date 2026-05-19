@@ -20,7 +20,6 @@
 
                     <div class="text-[12px] text-base-content/60">
                         <span>·</span>
-                        {{-- TODO: Bind the comment's created_at diffForHumans here (e.g., $comment->created_at->diffForHumans()) --}}
                         <span class="ml-1"
                             title="{{ $comment->created_at }}">{{ $comment->created_at->diffForHumans() }}</span>
                     </div>
@@ -134,7 +133,7 @@
         {{-- Reply Form (Hidden by default) --}}
         @auth
             <div id="reply-form-{{ $comment->id }}" class="hidden mt-2 ml-4">
-                <form action="{{ route('comments.store', [$comment->chirp_id, $comment->id]) }}" method="POST"
+                <form action="{{ route('chirps.comments.store', [$comment->chirp_id]) }}" method="POST"
                     class="flex gap-3 items-start">
                     @csrf
                     <div class="shrink-0 mt-1">
@@ -144,6 +143,8 @@
                         <textarea name="content" rows="1" maxlength="255"
                             class="textarea textarea-bordered w-full rounded-2xl bg-base-200/50 focus:bg-base-100 transition-colors border-none resize-none min-h-0 py-2 text-[14px]"
                             placeholder="Write a reply..." required></textarea>
+
+                        <input type="hidden" name="parent_id" value="{{ $comment->id }}">
                         <div class="flex gap-2">
                             <button type="button"
                                 onclick="document.getElementById('reply-form-{{ $comment->id }}').classList.add('hidden')"
@@ -156,7 +157,7 @@
         @endauth
 
         {{-- Nested Replies --}}
-        @if ($comment->childComments)
+        @if ($comment->childComments->isNotEmpty())
             <div class="mt-3 ml-2 border-l-2 border-base-200 pl-4 space-y-4">
                 @foreach ($comment->childComments as $reply)
                     <x-comment :comment="$reply" />

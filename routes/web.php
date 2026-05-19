@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\LikeController;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
 use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowerController;
-use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,16 +22,14 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('profile', ProfileController::class)->only(['show']);
 
-    Route::post('/comments/{chirp}/comment/{commentId}', [CommentController::class, 'store'])
-        ->name('comments.store');
-
-    Route::resource('comments', CommentController::class)->only(['update', 'destroy']);
-
-    Route::post('/like/{type}/{id}', [LikeController::class, 'store'])->name('like.toggle');
+    Route::resource('chirps.comments', CommentController::class)->only(['store', 'update', 'destroy'])->shallow();
 
     Route::post('/users/follow/{userToFollow}', [FollowerController::class, 'store'])->name('toggle-follow');
 
     Route::post('/logout', Logout::class);
+
+    // api
+    Route::post('api/likes/{type}/{id}', [LikeController::class, 'store'])->name('like.toggle');
 });
 
 // register & login

@@ -6,6 +6,7 @@ use App\Models\Chirp;
 use App\Models\Comment;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -30,28 +31,18 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Chirp $chirp, int $commentId)
+    public function store(Request $request, Chirp $chirp)
     {
         $validated = $request->validate([
             'content' => 'required|string|max:255',
+            'parent_id' => 'nullable|exists:comments,id'
         ]);
 
         $newComment = $chirp->comments()->create([
             'content' => $validated['content'],
-            'user_id' => $request->user()->id,
+            'user_id' => Auth::id(),
+            'parent_id' => $validated['parent_id'] ?? null
         ]);
-
-        // dd($newComment);
-
-        // this doesn't work at all and needs to be fixed
-        if ($commentId) {
-            $comment_exists = Comment::whereId($commentId)->exists();
-            if ($comment_exists) {
-                $newComment->parent_id = $commentId;
-                $newComment->save();
-            }
-        }
-
 
         return back()->with('success', 'comment added successflly');
     }

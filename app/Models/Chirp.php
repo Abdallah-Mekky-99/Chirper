@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +34,7 @@ class Chirp extends Model
     {
         return $this->comments()
             ->whereNull('parent_id')
-            ->with(['user', 'childComments.user'])
+            ->with(['user', 'childComments'])
             ->withCount('likes')
             ->when(Auth::check(), function ($query) {
                 $query->withExists(['likes' => fn($q) => $q->where('user_id', Auth::id())]);

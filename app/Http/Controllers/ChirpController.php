@@ -32,7 +32,7 @@ class ChirpController extends Controller
             ->take(50)
             ->get();
 
-        // dd($chirps->map(fn ($ch) => $ch->user->is_followed));
+        // dd($chirps->map(fn($ch) => $ch->topLevelComments));
 
         return view('home', compact('chirps'));
     }

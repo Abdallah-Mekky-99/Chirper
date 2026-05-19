@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +14,17 @@ class Comment extends Model
     protected $fillable = [
         'content',
         'user_id',
+        'parent_id'
     ];
+
+    public function scopeLoadRelated(Builder $commentQuery): Builder
+    {
+        return $commentQuery->with(['user', 'childComments'])
+            ->withCount('likes')
+            ->when(Auth::check(), function ($query) {
+                $query->withExists(['likes' => fn($q) => $q->where('user_id', Auth::id())]);
+            });
+    }
 
     public function user(): BelongsTo
     {
@@ -44,7 +55,7 @@ class Comment extends Model
     public function childComments(): HasMany
     {
         return $this->comments()
-            ->with('comments')
+            ->with(['user', 'childComments'])
             ->withCount('likes')
             ->when(Auth::check(), function ($query) {
                 $query->withExists(['likes' => fn($q) => $q->where('user_id', Auth::id())]);
