@@ -63,7 +63,10 @@ class User extends Authenticatable
 
     public function chirpLikes(): MorphToMany
     {
-        return $this->morphedByMany(Chirp::class, 'likable', 'likes');
+        return $this->morphedByMany(Chirp::class, 'likable', 'likes')
+            ->with(['user' => fn($userQuery) => $userQuery->WithIsFollowed()])
+            ->withCount('likes', 'comments')
+            ->withExists(['likes' => fn($q) => $q->where('user_id', Auth::id())]);
     }
 
     public function commentLikes(): MorphToMany

@@ -38,7 +38,7 @@ class ProfileController extends Controller
     {
         $user = User::query()
             ->with([
-                'chirps.comments.user',
+                'chirps.topLevelComments',
                 'followers' => fn($q) => $q->withIsFollowed(),
                 'followings' => fn($q) => $q->withIsFollowed()
             ])

@@ -131,7 +131,7 @@
             {{-- Comments Section (Toggleable) --}}
             <div id="comments-{{ $chirp->id }}" class="hidden mt-4 pt-4 border-t border-base-200">
                 @auth
-                    <form method="POST" action="{{ route('comments.store', [$chirp->id, 0]) }}"
+                    <form method="POST" action="{{ route('chirps.comments.store', [$chirp->id, 0]) }}"
                         class="flex gap-3 items-start">
                         @csrf
                         {{-- Shows the currently logged-in user's avatar next to the input --}}

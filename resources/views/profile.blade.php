@@ -18,32 +18,40 @@
                         Joined {{ $user->created_at->format('F Y') }}
                     </p>
                     <div class="flex items-center gap-4 mt-3">
-                        <button onclick="following_modal.showModal()" class="hover:underline text-sm focus:outline-none">
+                        <button onclick="following_modal.showModal()"
+                            class="hover:underline text-sm focus:outline-none">
                             <span class="font-bold text-base-content">{{ $user->followings_count }}</span>
                             <span class="text-base-content/60">Following</span>
                         </button>
-                        <button onclick="followers_modal.showModal()" class="hover:underline text-sm focus:outline-none">
+                        <button onclick="followers_modal.showModal()"
+                            class="hover:underline text-sm focus:outline-none">
                             <span class="font-bold text-base-content">{{ $user->followers_count }}</span>
                             <span class="text-base-content/60">Followers</span>
                         </button>
                     </div>
                 </div>
             </div>
-            
+
             <div class="mt-4">
                 <x-follow-button :user="$user" />
             </div>
         </div>
 
         <div class="tabs tabs-bordered mb-6">
-            <a class="tab tab-active font-semibold">Chirps</a>
+            <a href="{{ route('profile.show', $user->id) }}"
+                class="tab {{ request()->routeIs('profile.show') ? 'tab-active font-semibold' : 'text-base-content/40' }}">Chirps</a>
+            <a href="{{ route('profile.likes.index', $user->id) }}"
+                class="tab {{ request()->routeIs('profile.likes.index') ? 'tab-active font-semibold' : 'text-base-content/40' }}">Likes</a>
             <a class="tab text-base-content/40 cursor-not-allowed">Media</a>
-            <a class="tab text-base-content/40 cursor-not-allowed">Likes</a>
         </div>
 
         <div class="space-y-4">
+            @php
+                $showFollowButton = request()->routeIs('profile.likes.index') ? true : false;
+            @endphp
+
             @forelse ($chirps as $chirp)
-                <x-chirp :chirp="$chirp" :show-follow="false" />
+                <x-chirp :chirp="$chirp" :show-follow="$showFollowButton" />
             @empty
                 <div class="text-center py-12 bg-base-200/30 rounded-xl border border-dashed border-base-300">
                     <p class="text-base-content/50 italic">This user hasn't chirped anything yet...</p>

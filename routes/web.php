@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\LikeController;
+use App\Http\Controllers\Api\LikeToggle;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
 use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,8 +29,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/logout', Logout::class);
 
+    Route::resource('profile.likes', LikeController::class)->shallow()->only('index');
     // api
-    Route::post('api/likes/{type}/{id}', [LikeController::class, 'store'])->name('like.toggle');
+    Route::post('api/likes/{type}/{id}', LikeToggle::class)->name('like.toggle');
 });
 
 // register & login
