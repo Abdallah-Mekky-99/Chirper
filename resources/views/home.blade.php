@@ -13,11 +13,8 @@
                     @csrf
                     <div class="form-control w-full">
                         <textarea name="message" placeholder="What's on your mind?"
-                            class="textarea textarea-bordered w-full resize-none @error('message') textarea-error @enderror"
-                            rows="4"
-                            required
-                            maxlength="255"
-                            >{{ old('message') }}</textarea>
+                            class="textarea textarea-bordered w-full resize-none @error('message') textarea-error @enderror" rows="4"
+                            required maxlength="255">{{ old('message') }}</textarea>
                         @error('message')
                             <div class="label">
                                 <span class="label-text-alt text-error"> {{ $message }} </span>

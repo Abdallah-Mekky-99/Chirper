@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Comments\StoreCommentRequest;
+use App\Http\Requests\Comments\UpdateCommentRequest;
 use App\Models\Chirp;
 use App\Models\Comment;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -31,12 +33,9 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Chirp $chirp)
+    public function store(StoreCommentRequest $request, Chirp $chirp)
     {
-        $validated = $request->validate([
-            'content' => 'required|string|max:255',
-            'parent_id' => 'nullable|exists:comments,id'
-        ]);
+        $validated = $request->validated();
 
         $newComment = $chirp->comments()->create([
             'content' => $validated['content'],
@@ -66,14 +65,9 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        $this->authorize('update', $comment);
-
-        $validated = $request->validate([
-            'content' => 'required|string|max:255',
-        ]);
-
+        $validated = $request->validated();
         $comment->update($validated);
 
         return back()->with('success', 'comment updated.');

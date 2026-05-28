@@ -99,9 +99,11 @@
                     method="POST" class="hidden mt-2">
                     @csrf
                     @method('PATCH')
-                    <textarea name="content" rows="2"
-                        class="textarea textarea-bordered w-full rounded-xl bg-base-100 focus:bg-base-100 transition-colors border-none resize-none min-h-0 py-2 text-[14px] leading-relaxed"
-                        required>{{ $comment->content }}</textarea>
+                    <textarea name="content" rows="2" required maxlength="255"
+                        class="textarea 
+                        textarea-bordered w-full rounded-xl bg-base-100 focus:bg-base-100
+                        transition-colors border-none resize-none min-h-0 py-2 text-[14px]
+                        leading-relaxed">{{ $comment->content }}</textarea>
                     <div class="flex justify-end gap-2 mt-2">
                         <button type="button"
                             onclick="document.getElementById('comment-edit-form-{{ $comment->id }}').classList.add('hidden'); document.getElementById('comment-text-{{ $comment->id }}').classList.remove('hidden');"

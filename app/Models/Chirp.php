@@ -42,9 +42,4 @@ class Chirp extends Model
             })
             ->latest();
     }
-
-    // public function scopeLiked(Builder $query) 
-    // {
-    //     return $query->where()
-    // }
 }
