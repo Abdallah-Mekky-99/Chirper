@@ -13,16 +13,17 @@
                         @csrf
 
                         <!-- Name -->
-                        <x-form-field name="name" label="Name" placeholder="John Doe" type="text"/>
+                        <x-form-field name="name" label="Name" placeholder="John Doe" type="text" />
 
                         <!-- Email -->
-                        <x-form-field name="email" label="Email" placeholder="JohnDoe@example.com" type="email"/>
+                        <x-form-field name="email" label="Email" placeholder="JohnDoe@example.com" type="email" />
 
                         <!-- Password -->
-                        <x-form-field name="password" label="Password" placeholder="••••••••" type="password"/>
+                        <x-form-field name="password" label="Password" placeholder="••••••••" type="password" />
 
                         <!-- Password Confirmation -->
-                        <x-form-field name="password_confirmation" label="Confirm Password" placeholder="••••••••" type="password"/>
+                        <x-form-field name="password_confirmation" label="Confirm Password" placeholder="••••••••"
+                            type="password" />
 
                         <!-- submit button -->
                         <div class="form-control mt-8">

@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/design-preview', function () {
     return view('preview');
-})->name('design-preview');
+})->name('design-preview')
+    ->middleware('auth.basic');
 
 Route::get('/', [ChirpController::class, 'index'])->name('chirps.index');
 
@@ -37,10 +38,12 @@ Route::middleware('auth')->group(function () {
 // register & login
 Route::middleware('guest')->group(function () {
 
+    //register
     Route::view('/register', 'auth.register')
         ->name('register');
     Route::post('/register', Register::class);
 
+    //login
     Route::view('/login', 'auth.login')
         ->name('login');
     Route::post('/login', Login::class);
