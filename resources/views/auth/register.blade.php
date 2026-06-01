@@ -39,6 +39,9 @@
                         Already have an account?
                         <a href="/login" class="link link-primary">Sign in</a>
                     </p>
+                    <p class="text-center text-sm">
+                        <a href="{{ route('google-auth') }}" class="link link-primary">Sign in with google</a>
+                    </p>
                 </div>
             </div>
         </div>
