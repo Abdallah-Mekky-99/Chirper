@@ -49,6 +49,8 @@ class ProfileController extends Controller
         return view('profile', [
             'user' => $user,
             'chirps' => $user->chirps,
+            'emptyMessage' => "This user hasn't chirped anything yet...",
+            'showFollowButton' => false
         ]);
     }
 

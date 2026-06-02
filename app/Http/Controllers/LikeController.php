@@ -26,6 +26,8 @@ class LikeController extends Controller
         return view('profile', [
             'user' => $user,
             'chirps' => $user->chirpLikes,
+            'emptyMessage' => "This user hasn't liked any chirps yet...",
+            'showFollowButton' => true
         ]);
     }
 }

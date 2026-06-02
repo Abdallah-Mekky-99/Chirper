@@ -46,17 +46,15 @@
         </div>
 
         <div class="space-y-4">
-            @php
-                $showFollowButton = request()->routeIs('profile.likes.index') ? true : false;
-            @endphp
 
             @forelse ($chirps as $chirp)
                 <x-chirp :chirp="$chirp" :show-follow="$showFollowButton" />
             @empty
                 <div class="text-center py-12 bg-base-200/30 rounded-xl border border-dashed border-base-300">
-                    <p class="text-base-content/50 italic">This user hasn't chirped anything yet...</p>
+                    <p class="text-base-content/50 italic">{{ $emptyMessage }}</p>
                 </div>
             @endforelse
+
         </div>
     </div>
 

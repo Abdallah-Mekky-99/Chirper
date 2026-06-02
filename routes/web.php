@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', Logout::class);
 
     Route::resource('profile.likes', LikeController::class)->shallow()->only('index');
+
     // api
     Route::post('api/likes/{type}/{id}', LikeToggle::class)->name('like.toggle');
 });
