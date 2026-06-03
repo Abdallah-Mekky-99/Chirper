@@ -3,15 +3,14 @@
 use App\Http\Controllers\Api\LikeToggle;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
+use App\Http\Controllers\Auth\OAuthController;
 use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Socialite;
 
 Route::get('/design-preview', function () {
     return view('preview');
@@ -53,27 +52,7 @@ Route::middleware('guest')->group(function () {
 
 
     //Google
-    Route::get('/auth/google/redirect', function () {
-        return Socialite::driver('google')->redirect();
-    })->name('google-auth');
+    Route::get('/auth/google/redirect', [OAuthController::class, 'redirect'])->name('google-auth');
 
-    Route::get('/auth/google/callback', function () {
-        $googleUser = Socialite::driver('google')->user();
-
-        $user = User::query()->updateOrCreate(
-            [
-                'google_id' => $googleUser->id,
-            ],
-            [
-                'name' => $googleUser->name,
-                'email' => $googleUser->email,
-                'google_token' => $googleUser->token,
-                'google_refresh_token' => $googleUser->refreshToken,
-            ]
-        );
-
-        Auth::login($user);
-
-        return redirect('/');
-    });
+    Route::get('/auth/google/callback', [OAuthController::class, 'callback']);
 });
