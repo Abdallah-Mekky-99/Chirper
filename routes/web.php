@@ -10,7 +10,9 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Socialite;
 
 Route::get('/design-preview', function () {
     return view('preview');
@@ -51,8 +53,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', Login::class);
 
 
-    //Google
-    Route::get('/auth/google/redirect', [OAuthController::class, 'redirect'])->name('google-auth');
+    //OAuth2
+    Route::get('/auth/{provider}/redirect', [OAuthController::class, 'redirect'])->name('external-auth');
 
-    Route::get('/auth/google/callback', [OAuthController::class, 'callback']);
+    Route::get('/auth/{provider}/callback', [OAuthController::class, 'callback']);
 });

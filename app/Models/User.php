@@ -30,7 +30,10 @@ class User extends Authenticatable
         'password',
         'google_id',
         'google_token',
-        'google_refresh_token'
+        'google_refresh_token',
+        'github_id',
+        'github_token',
+        'github_refresh_token'
     ];
 
     /**
@@ -90,6 +93,11 @@ class User extends Authenticatable
     public function followings(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
+    }
+
+    public function socialAccounts(): HasMany
+    {
+        return $this->hasMany(SocialAccount::class);
     }
 
     public function scopeWithIsFollowed($query)
