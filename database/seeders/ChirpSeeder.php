@@ -12,7 +12,9 @@ class ChirpSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::count() < 3 ?
+        $users = User::take(3)->get();
+
+        $users = $users->count() < 3 ?
             collect([
                 User::create([
                     'name' => 'Alice Developer',
@@ -29,7 +31,7 @@ class ChirpSeeder extends Seeder
                     'email' => 'charlie@example.com',
                     'password' => bcrypt('password'),
                 ]),
-            ]) : User::take(3)->get();
+            ]) : $users;
 
         $chirps = [
             'Just discovered Laravel - where has this been all my life? 🚀',

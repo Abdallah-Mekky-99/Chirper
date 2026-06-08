@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Chirp;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,11 +17,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $users = User::factory(5)
+            ->has(Chirp::factory(2))
+            ->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $chirps = Chirp::all();
+
+        $users->each(function (User $user) use ($chirps) {
+            $user->chirpLikes()->attach(
+                $chirps->random(2)
+            );
+        });
+
+        Comment::factory(20)
+            ->recycle($users)
+            ->recycle($chirps)
+            ->create();
     }
 }
