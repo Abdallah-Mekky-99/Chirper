@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Auth\Events\Registered;
+
 
 class Register extends Controller
 {
@@ -27,6 +29,9 @@ class Register extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
+
+
+        event(new Registered($user));
 
         // Log them in
         Auth::login($user);
